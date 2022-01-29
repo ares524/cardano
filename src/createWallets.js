@@ -22,17 +22,17 @@ const createWallet = (account) => {
   return ccli.wallet(account);
 };
 
-// const masterWallet = createWallet(`master`);
-// console.log(`[master wallet]`, masterWallet.paymentAddr);
+const masterWallet = createWallet(`master`);
+console.log(`[master wallet]`, masterWallet.paymentAddr);
 
-// const receiverWallet = createWallet(`receiver`);
-// console.log(`[receiver wallet]`, receiverWallet.paymentAddr);
+const receiverWallet = createWallet(`receiver`);
+console.log(`[receiver wallet]`, receiverWallet.paymentAddr);
 
-for (let id = 0; id < 10; id++) {
-  const account = uuid.v4();
-  const wallet = createWallet(account);
-  console.log(`[wallet #${id + 1}]`, wallet.paymentAddr);
-}
+// for (let id = 0; id < 10; id++) {
+//   const account = uuid.v4();
+//   const wallet = createWallet(account);
+//   console.log(`[wallet #${id + 1}]`, wallet.paymentAddr);
+// }
 
 // const wallet = ccli.wallet(`master`);
 // console.log(`balance`, wallet.balance());

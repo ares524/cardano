@@ -23,6 +23,16 @@ https://hydra.iohk.io/build/7654130/download/1/index.html
 docker compose up -d
 ```
 
+> ⚠ Note: if this is the first time you are running this project, you will have to wait for the entire copy to be downloaded from the network (this can take days)
+
+You can follow the logs using the following command
+
+```bash
+docker logs -f cardano-node
+```
+
+Install project dependencies
+
 ```bash
 yarn install # or just yarn
 ```

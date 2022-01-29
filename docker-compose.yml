@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  node:
+    image: "inputoutput/cardano-node:latest"
+    container_name: cardano-node
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - ${NODE_PORT}
+    volumes:
+        - ./data:/data
+        - ./config:/config
+    tmpfs:
+      - /ipc
+    network_mode: host
+    command: run --config /config/mainnet-config.json --database-path /data/db --topology /config/mainnet-topology.json --host-addr 0.0.0.0 --port ${NODE_PORT} --socket-path ${CARDANO_NODE_SOCKET_PATH}
+
+# volumes:
+#   data:
+#   config:

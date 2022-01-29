@@ -1,0 +1,19 @@
+{
+  "name": "ctest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start:tip": "env-cmd -f .env node ./src/queryTip.js",
+    "start:balance": "env-cmd -f .env node ./src/balance.js",
+    "start:create": "env-cmd -f .env node ./src/createWallets.js",
+    "start:sendX": "env-cmd -f .env node ./src/sendXAda.js",
+    "start:sendFull": "env-cmd -f .env node ./src/sendFullAda.js",
+    "docker": "docker-compose --env-file .env -f docker-compose.yml up -d --build"
+  },
+  "dependencies": {
+    "env-cmd": "^10.1.0",
+    "sync-fetch": "^0.3.1",
+    "uuid": "^8.3.2"
+  }
+}

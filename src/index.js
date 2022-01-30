@@ -8,6 +8,7 @@ const { Command } = require('commander');
 const ccli = require('./services/cardano-cli');
 
 const queryTip = require('./usecases/queryTip');
+const queryTxById = require('./usecases/queryTxById');
 const createWallet = require('./usecases/createWallet');
 const sendOneToOne = require('./usecases/sendOneToOne');
 const sendOneToMany = require('./usecases/sendOneToMany');
@@ -44,7 +45,7 @@ walletCmd
     });
   });
 
-const sendCmd = program.command('send').description('Wallet Transaction Management');
+const sendCmd = program.command('send').description('Wallet Send Transaction Management');
 
 // one-to-one
 sendCmd
@@ -142,8 +143,17 @@ sendCmd
     } catch (error) {
       console.log(chalk.red(`Error`), error);
     }
+  });
 
-    fromAccounts.forEach((account) => {});
+const transactionCmd = program.command('transaction').description('Blockchain Transaction Management');
+
+transactionCmd
+  .command('status')
+  .description('Print the transaction details')
+  .argument('<id>', 'The transaction id')
+  .action(async (id) => {
+    const tx = await queryTxById(id);
+    console.log(chalk.green(`Transaction:`), JSON.stringify(tx, null, 2));
   });
 
 program

@@ -18,6 +18,7 @@
     "commander-completion": "^1.0.1",
     "dotenv": "^14.3.2",
     "env-cmd": "^10.1.0",
+    "node-fetch": "2.0.0",
     "sync-fetch": "^0.3.1"
   }
 }

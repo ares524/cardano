@@ -1,6 +1,6 @@
 # cada
 
-A custom CLI to control and transfer tokens across multiple wallets using a local cardano-node with docker.
+🖥️ NODE.JS - A custom CLI to control and transfer tokens across multiple wallets using a local cardano-node with docker.
 
 ## Installation
 

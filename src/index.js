@@ -11,6 +11,7 @@ const queryTip = require('./usecases/queryTip');
 const createWallet = require('./usecases/createWallet');
 const sendOneToOne = require('./usecases/sendOneToOne');
 const sendOneToMany = require('./usecases/sendOneToMany');
+const sendManyToOne = require('./usecases/sendManyToOne');
 
 const program = new Command();
 
@@ -39,7 +40,7 @@ walletCmd
   .action((accounts) => {
     accounts.forEach((account) => {
       const wallet = ccli.wallet(account);
-      console.log(chalk.green(`'${account}' balance:`), wallet.balance());
+      console.log(chalk.green(`'${account}' balance:`), JSON.stringify(wallet.balance(), null, 2));
     });
   });
 
@@ -78,7 +79,7 @@ sendCmd
   .action(({ from, to, amount }) => {
     console.log(`Sending ${chalk.blue(`${amount} ADA`)} from ${chalk.yellow(from)}' to\n${to.map((addr) => `'${chalk.yellow(addr)}'`).join('\n')}`);
     try {
-      const tx = sendOneToMany(from, amount, to);
+      const tx = sendOneToMany(from, to, amount);
       console.log(chalk.green(`Transaction:`), tx);
     } catch (error) {
       console.log(chalk.red(`Error:`), error);
@@ -113,6 +114,36 @@ sendCmd
         console.log(chalk.red(`Error ${account}:`), error);
       }
     });
+  });
+
+// many-to-one (CLEAR)
+sendCmd
+  .command('clear')
+  .description('Send ADA from a given list of sender accounts to a given receiver address in one transaction (pay fee for one transaction)')
+  .requiredOption('-f, --from <accounts...>', 'The sender wallet account names')
+  .requiredOption('-t, --to <address>', 'The receiver wallet payment address')
+  .option('-a, --amount <number>', 'The amount to send (in ADA)')
+  .option('--full', 'When provided, transfers the entire balance of each sender to receiver')
+  .action(({ from: fromAccounts, to, amount, full }) => {
+    if (!amount && !full) {
+      console.log(`error: required option '-a, --amount <number>' or '--full' not specified`);
+      return;
+    }
+
+    console.log(
+      `Sending ${chalk.blue(full ? `full balance` : `${amount} ADA`)} from ${fromAccounts
+        .map((addr) => `'${chalk.yellow(addr)}'`)
+        .join(', ')} to '${chalk.yellow(to)}'`
+    );
+
+    try {
+      const txHash = sendManyToOne(fromAccounts, to, { amount, fullBalance: full });
+      console.log(chalk.green(`Transaction:`), txHash);
+    } catch (error) {
+      console.log(chalk.red(`Error`), error);
+    }
+
+    fromAccounts.forEach((account) => {});
   });
 
 program

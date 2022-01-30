@@ -1,6 +1,6 @@
 const ccli = require('../services/cardano-cli');
 
-function sendOneToMany(senderAccount, amount, receiverAddresses) {
+function sendOneToMany(senderAccount, receiverAddresses, amount) {
   const transferAmountLovelace = ccli.toLovelace(amount);
 
   const senderWallet = ccli.wallet(senderAccount);

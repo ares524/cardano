@@ -815,7 +815,7 @@ class CardanoCLI {
       --tx-body-file ${options.txBody} \
       --tx-in-count ${options.txIn.length} \
       --tx-out-count ${options.txOut.length} \
-      --mainnet \
+      --${this.network} \
       --witness-count ${options.witnessCount} \
       --protocol-params-file ${this.protocolParametersPath}`)
         .toString()

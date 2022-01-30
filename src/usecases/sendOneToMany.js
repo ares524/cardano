@@ -28,8 +28,6 @@ function sendOneToMany(senderAccount, amount, receiverAddresses) {
     ],
   };
 
-  console.log(txInfo);
-
   const raw = ccli.transactionBuildRaw(txInfo);
 
   // calculate fee
@@ -52,7 +50,7 @@ function sendOneToMany(senderAccount, amount, receiverAddresses) {
   });
 
   // broadcast transaction
-  ccli.transactionSubmit(txSigned);
+  return ccli.transactionSubmit(txSigned);
 }
 
 module.exports = sendOneToMany;

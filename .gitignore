@@ -104,5 +104,6 @@ dist
 .tern-port
 
 data/
+data-testnet/
 config/*
 !config/.gitkeep

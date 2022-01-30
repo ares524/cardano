@@ -63,3 +63,25 @@ Expected output
   "block": 6815791
 }
 ```
+
+## CLI
+
+To use cli globaly just run `npm link` then run `cada` on terminal
+
+Expected output
+
+```bash
+Usage: ccli [options] [command]
+
+A Cardano CLI Bot
+
+Options:
+  -V, --version   output the version number
+  -h, --help      display help for command
+
+Commands:
+  wallet          Wallet Management
+  send            Wallet Transaction Management
+  status          Make a simple query tip to the current cardano-node
+  help [command]  display help for command
+```

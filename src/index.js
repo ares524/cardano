@@ -14,7 +14,10 @@ const sendOneToMany = require('./usecases/sendOneToMany');
 
 const program = new Command();
 
-program.name('ccli').description('A Cardano CLI Bot').version('0.0.1');
+program
+  .name('cada')
+  .description('A custom CLI to control and transfer tokens across multiple wallets using a local cardano-node with docker.')
+  .version('0.0.1');
 
 const walletCmd = program.command('wallet').description('Wallet Management');
 

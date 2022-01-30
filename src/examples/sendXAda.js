@@ -1,13 +1,7 @@
-const CardanoCLI = require('./cardanocli-js');
+const ccli = require('../services/cardano-cli');
 
-const shelleyGenesisPath = `${process.env.NODE_BASE_FOLDER}/config/mainnet-shelley-genesis.json`;
-
-const ccli = new CardanoCLI({
-  shelleyGenesisPath,
-  cliPrefix: process.env.APP_CLI_PREFIX,
-  cliPath: process.env.APP_CLI_COMMAND_PATH,
-  dir: `./data`,
-});
+const transferAmountADA = 5;
+const transferAmountLovelace = ccli.toLovelace(transferAmountADA);
 
 const masterWallet = ccli.wallet('master');
 console.log(`[master wallet]`, masterWallet.paymentAddr);
@@ -25,18 +19,24 @@ let txInfo = {
   txIn: masterCachedUtxos.utxo,
   // txIn: ccli.queryUtxo(masterWallet.paymentAddr),
   txOut: [
+    // value going back to masterWallet
+    {
+      address: masterWallet.paymentAddr,
+      value: {
+        lovelace: masterCachedUtxos.value.lovelace - transferAmountLovelace,
+      },
+    },
     // value going to receiver
     {
       address: receiverWallet.paymentAddr,
       value: {
-        // send full balance from masterWallet
-        lovelace: masterCachedUtxos.value.lovelace,
+        lovelace: transferAmountLovelace,
       },
     },
   ],
   metadata: {
     1: {
-      ccli: 'CardanoCLI',
+      ccli: 'First Metadata from cardanocli-js',
     },
   },
 };
@@ -54,7 +54,7 @@ let fee = ccli.transactionCalculateMinFee({
 
 console.log(`[calculate fee]`, fee);
 
-// pay the fee by subtracting it from the receiverWallet utxo
+// pay the fee by subtracting it from the masterWallet utxo
 txInfo.txOut[0].value.lovelace -= fee;
 
 // create final transaction

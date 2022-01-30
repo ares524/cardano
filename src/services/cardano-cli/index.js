@@ -1,5 +1,4 @@
-const uuid = require('uuid');
-const CardanoCLI = require('./cardanocli-js');
+const CardanoCLI = require('../../wrapper');
 
 const shelleyGenesisPath = `${process.env.NODE_BASE_FOLDER}/config/mainnet-shelley-genesis.json`;
 
@@ -10,4 +9,4 @@ const ccli = new CardanoCLI({
   dir: `./data`,
 });
 
-console.log(ccli.queryTip());
+module.exports = ccli;

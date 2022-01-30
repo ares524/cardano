@@ -7,6 +7,7 @@ const { Command } = require('commander');
 
 const ccli = require('./services/cardano-cli');
 
+const queryTip = require('./usecases/queryTip');
 const createWallet = require('./usecases/createWallet');
 const sendOneToOne = require('./usecases/sendOneToOne');
 const sendOneToMany = require('./usecases/sendOneToMany');
@@ -77,12 +78,10 @@ sendCmd
   });
 
 program
-  .command('test')
-  .description('Test')
-  .requiredOption('-f, --from <accounts...>', 'The sender wallet account name')
-  // .argument('<accounts...>', 'Account names')
-  .action(({ from }) => {
-    console.log('test', from);
+  .command('status')
+  .description('Make a simple query tip to the current cardano-node')
+  .action(() => {
+    console.log(queryTip());
   });
 
 program.parse();

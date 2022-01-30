@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "env-cmd -f .env node ./src/index.js",
-    "example": "env-cmd -f .env node ./src/examples/queryTransaction.js",
+    "status": "env-cmd -f .env node ./src/examples/queryTip.js",
     "docker": "docker-compose --env-file .env -f docker-compose.yml up -d --build"
   },
   "dependencies": {

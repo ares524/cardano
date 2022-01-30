@@ -1,10 +1,12 @@
-# cardano-js
+# cada
+
+A custom CLI to control and transfer tokens across multiple wallets using a local cardano-node with docker.
 
 ## Installation
 
 ```bash
-git clone git@github.com:BrunoS3D/cardano-js.git
-cd cardano-js
+git clone git@github.com:BrunoS3D/cada.git
+cd cada
 ```
 
 Create environment variable file `.env` based on [.env.example](./.env.example) on project root folder
@@ -37,10 +39,16 @@ Install project dependencies
 yarn install # or just yarn
 ```
 
+Register app as global command
+
+```bash
+npm link
+```
+
 Run a simple cardano-node query
 
 ```bash
-yarn start:tip # cardano-cli query tip --mainnet
+cada status
 ```
 
 Expected output

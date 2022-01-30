@@ -5,7 +5,7 @@
   "license": "MIT",
   "main": "./src/index.js",
   "bin": {
-    "cada": "env-cmd -f .env node --inspect ./src/index.js"
+    "cada": "./src/index.js"
   },
   "scripts": {
     "start": "env-cmd -f .env node ./src/index.js",

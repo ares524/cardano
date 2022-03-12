@@ -20,5 +20,8 @@
     "env-cmd": "^10.1.0",
     "node-fetch": "2.0.0",
     "sync-fetch": "^0.3.1"
+  },
+  "devDependencies": {
+    "zx": "^5.2.0"
   }
 }

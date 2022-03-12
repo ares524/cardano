@@ -8,6 +8,8 @@
     "cada": "./src/index.js"
   },
   "scripts": {
+    "balance": "zx ./scripts/balance.mjs",
+    "mint": "zx ./scripts/mint.mjs",
     "start": "env-cmd -f .env node ./src/index.js",
     "status": "env-cmd -f .env node ./src/examples/queryTip.js",
     "docker": "docker-compose --env-file .env -f docker-compose.yml up -d --build"

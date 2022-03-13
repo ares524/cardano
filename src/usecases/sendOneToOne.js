@@ -14,9 +14,7 @@ function sendOneToOne(senderAccount, receiverAddress, { amount, fullBalance }) {
         // value going to receiver
         {
           address: receiverAddress,
-          value: {
-            lovelace: senderCachedUtxos.value.lovelace,
-          },
+          value: senderCachedUtxos.value,
         },
       ],
     };
@@ -42,7 +40,7 @@ function sendOneToOne(senderAccount, receiverAddress, { amount, fullBalance }) {
             lovelace: transferAmountLovelace,
           },
         },
-      ],
+      ].sort((a, b) => a.value.lovelace - b.value.lovelace),
     };
   }
 
